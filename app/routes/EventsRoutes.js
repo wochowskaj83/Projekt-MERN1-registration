@@ -1,22 +1,13 @@
 const express = require ('express')
 const router = express.Router()
+const EventsController = require('../controllers/EventsController')
 
 module.exports = () => {
-    router.get('/',(req,res,next) =>{
-        res.json({
-            events: [
-                {
-                name : "Krystian Dziopa",
-                event: {key: 'front-end', val: 'Front End'},
-                city: {key: 'warsaw', val: 'Warszawa'},
-                },
-                {
-                name : "Łukasz Badocha",
-                event: {key: 'back-end', val: 'Back End'},
-                city: {key: 'cracow', val: 'Kraków'},
-                },
-             ]
-        })
-    })
+    router.get('/', EventsController.index)
+    
+    router.post('/add', EventsController.create)
+    
+    router.delete('/delete', EventsController.delete)
+   
     return router
 }
