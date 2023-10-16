@@ -16,7 +16,8 @@ module.exports = {
         })
     },
     create: (req, res, next) => {
-        res.send('create')
+        const event = req.body
+        res.end(JSON.stringify(event))
     },
     delete: (req, res, next) => {
         res.send('delete')
