@@ -4,12 +4,17 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "express-router": "^0.0.1"
+  },
+  "devDependencies": {
+    "demon": "^0.0.1"
   }
 }
