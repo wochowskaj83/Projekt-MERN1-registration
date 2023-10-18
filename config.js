@@ -6,7 +6,7 @@ module.exports = {
     db: {
         host: '127.0.0.1',
         port: 27017,
-        name: 'ProjektMERN1-registration',
+        name: 'ProjektMern1-registration',
         password: ''
     }
 }
