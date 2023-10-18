@@ -1,22 +1,22 @@
+const { response } = require('express')
 const EventModel = require('../models/EventModel')
 
 
 module.exports = {
-    index: (req, res, next) => {
-        res.json({
-            events: [
-                {
-                    name: "Krystian Dziopa",
-                    event: { key: 'front-end', val: 'Front End' },
-                    city: { key: 'warsaw', val: 'Warszawa' },
-                },
-                {
-                    name: "Łukasz Badocha",
-                    event: { key: 'back-end', val: 'Back End' },
-                    city: { key: 'cracow', val: 'Kraków' },
-                },
-            ]
+    index: (req, res) => {
+        const events = EventModel({
+            name: req.body.name,
+            event: req.body.event,
+            city: req.body.city
         })
+        EventModel.find()
+            .then((events) => {
+            res.status(200).json(events)
+            })
+            .catch(err => {
+            res.status(500).json({ error: err })
+            })
+
     },
     create: (req, res) => {
         const event = new EventModel({
@@ -38,7 +38,7 @@ module.exports = {
         EventModel.findByIdAndDelete(req.params.id)
             .then(response => {
                 return res.status(204).json({
-                    id:id,
+                    id: id,
                     deleted: true
                 })
             })
