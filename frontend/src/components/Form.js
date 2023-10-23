@@ -24,6 +24,48 @@ const Form = () => {
         ['cracow', 'Kraków']
     ]
 
+    const saveEvent = (eventObj) => {
+
+    }
+
+    const resetForm = () => {
+        setName('')
+        setEvent({ key: '', val: '' })
+        setCity({ key: '', val: '' })
+        setErrors([])
+    }
+
+    const validateForm = (e) => {
+        e.preventDefault()
+
+        let errorsValidate = []
+
+        if (name.trim() === '') {
+            errorsValidate.push('wpisz imię i nazwisko')
+        }
+        if (event.key.trim() === '') {
+            errorsValidate.push('wybierz kurs')
+        }
+        if (city.key.trim() === '') {
+            errorsValidate.push('wybierz miasto')
+        }
+
+        if (errorsValidate.lenght > 0) {
+            setErrors(
+                errorsValidate.map((errorTxt, index) => {
+                    return <li key={index}>{errorTxt}</li>
+                })
+            )
+
+            return false
+        }
+
+        saveEvent()
+
+        resetForm()
+
+    }
+
     const handleChangeName = (e) => {
         setName(e.target.value)
     }
@@ -44,10 +86,10 @@ const Form = () => {
 
     return (
         <div className="formwrapper">
-            <form action='#'>
+            <form action='#' onSubmit={validateForm}>
                 <div className="wrapper">
-                    <label htmlFor="name">Imię i nazwisko</label>
-                    <input type="text" id="name" value={name} onChange={handleChangeName} />
+                    <label htmlFor='name'>Imię i nazwisko</label>
+                    <input name='name' id='name' type='text' value={name} onChange={handleChangeName}/>
                 </div>
                 <div className="wrapper">
                     <label htmlFor="event">Wydarzenie</label>
@@ -55,28 +97,30 @@ const Form = () => {
                         values={choicesEvents}
                         selectedValue={event.key}
                         onValueChange={handleChangeEvent}
-                        id='events'
+                        id='event'
                     />
                 </div>
                 <div className="wrapper">
                     <label htmlFor="city">Miasto</label>
                     <Select
                         values={choicesCities}
-                        selectedValue={event.key}
+                        selectedValue={city.key}
                         onValueChange={handleChangeCity}
                         id='city'
                     />
                 </div>
                 <div className="wrapper">
-                    <button type="submit">Zapis na szkolenie</button>
+                    <button type="submit">Zapisz na szkolenie</button>
                 </div>
             </form>
 
             <div className="errorsWrapper">
-                <ul className='errors'></ul>
+                <ul className='errors'>
+                    {errors}
+                </ul>
             </div>
         </div>
     )
 }
 
-export default Form
+export default Form;
