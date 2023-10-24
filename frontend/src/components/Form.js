@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from '../config'
 import { useState } from 'react'
 import Select from './Select'
 import './Form.css'
@@ -24,7 +25,16 @@ const Form = () => {
         ['cracow', 'Kraków']
     ]
 
+
     const saveEvent = (eventObj) => {
+        axios
+            .post(config.api.url + '/events/add', eventObj, { mode: 'cors' })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
 
     }
 
@@ -60,7 +70,14 @@ const Form = () => {
             return false
         }
 
-        saveEvent()
+
+        const newEvent = {
+            name: name,
+            event: event,
+            city: city
+        }
+
+        saveEvent(newEvent)
 
         resetForm()
 
@@ -89,7 +106,7 @@ const Form = () => {
             <form action='#' onSubmit={validateForm}>
                 <div className="wrapper">
                     <label htmlFor='name'>Imię i nazwisko</label>
-                    <input name='name' id='name' type='text' value={name} onChange={handleChangeName}/>
+                    <input name='name' id='name' type='text' value={name} onChange={handleChangeName} />
                 </div>
                 <div className="wrapper">
                     <label htmlFor="event">Wydarzenie</label>
