@@ -50,7 +50,7 @@ const Form = () => {
             errorsValidate.push('wybierz miasto')
         }
 
-        if (errorsValidate.lenght > 0) {
+        if (errorsValidate.length > 0) {
             setErrors(
                 errorsValidate.map((errorTxt, index) => {
                     return <li key={index}>{errorTxt}</li>
