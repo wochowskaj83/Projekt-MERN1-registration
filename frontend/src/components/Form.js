@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Select from './Select'
 import './Form.css'
 
-const Form = () => {
+const Form = (props) => {
     const [name, setName] = useState('')
     const [event, setEvent] = useState({ key: '', val: '' })
     const [city, setCity] = useState({ key: '', val: '' })
@@ -25,12 +25,11 @@ const Form = () => {
         ['cracow', 'Kraków']
     ]
 
-
     const saveEvent = (eventObj) => {
         axios
             .post(config.api.url + '/events/add', eventObj, { mode: 'cors' })
             .then((res) => {
-                console.log(res)
+               props.getEvents()
             })
             .catch((err) => {
                 console.error(err)
