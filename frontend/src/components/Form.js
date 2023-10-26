@@ -126,7 +126,7 @@ const Form = (props) => {
                     />
                 </div>
                 <div className="wrapper">
-                    <button type="submit">Zapisz na szkolenie</button>
+                    <button type="submit" className='submit'>Zapisz na szkolenie</button>
                 </div>
             </form>
 
