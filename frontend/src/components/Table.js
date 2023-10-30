@@ -16,15 +16,15 @@ const Table = ({ events, deleteEvent, ...rest }) => {
             <tbody>
                 {events.map((row, index) => {
                     return (
-                        <tr>
+                        <tr key={row._id}>
                             <td>{index}</td>
                             <td>{row.name}</td>
-                            <td eventkey={row.event.key}>{row.event.key}</td>
+                            <td eventkey={row.event.key}>{row.event.val}</td>
                             <td citykey={row.city.key}>{row.city.val}</td>
                             <td>
                                 <button
                                     onClick={() => {
-                                        console.log(row._id)
+                                        deleteEvent(row._id)
                                     }}
                                     className='delete'>
                                     Usuń
